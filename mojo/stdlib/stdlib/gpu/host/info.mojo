@@ -895,6 +895,59 @@ alias GTX1060 = GPUInfo(
 
 
 # ===-----------------------------------------------------------------------===#
+# RTX1060
+# ===-----------------------------------------------------------------------===#
+
+
+fn _get_gtx1060_target() -> __mlir_type.`!kgen.target`:
+    """
+    Creates an MLIR target configuration for NVIDIA GTX 1060 GPU.
+
+    Returns:
+        MLIR target configuration for GTX 1060.
+    """
+
+    return __mlir_attr[
+        `#kgen.target<triple = "nvptx64-nvidia-cuda", `,
+        `arch = "sm_61", `,
+        `features = "+ptx63,+sm_61", `,
+        `tune_cpu = "sm_61", `,
+        `data_layout = "e-p3:32:32-p4:32:32-p5:32:32-p6:32:32-i64:64-i128:128-v16:16-v32:32-n16:32:64",`,
+        `index_bit_width = 64,`,
+        `simd_bit_width = 128`,
+        `> : !kgen.target`,
+    ]
+
+
+alias GTX1060 = Info(
+    name="GTX1060",
+    vendor=Vendor.NVIDIA_GPU,
+    api="cuda",
+    arch_name="turing",
+    compile_options="nvptx-short-ptr=true",
+    compute=6.1,
+    version="sm_61",
+    sm_count=10,
+    warp_size=32,
+    threads_per_sm=2048,
+    threads_per_warp=32,
+    warps_per_multiprocessor=64,
+    threads_per_multiprocessor=2048,
+    thread_blocks_per_multiprocessor=36,
+    shared_memory_per_multiprocessor=48 * _KB,
+    register_file_size=65536,
+    register_allocation_unit_size=256,
+    allocation_granularity="warp",
+    max_registers_per_thread=255,
+    max_registers_per_block=32768,
+    max_blocks_per_multiprocessor=16,
+    shared_memory_allocation_unit_size=32,
+    warp_allocation_granularity=4,
+    max_thread_block_size=1024,
+)
+
+
+# ===-----------------------------------------------------------------------===#
 # MI300X
 # ===-----------------------------------------------------------------------===#
 
